@@ -68,7 +68,7 @@ def strip(input):
     ending = []
     start = 0
     end = len(input)
-    index = [i for i, line in enumerate(input) if line == 'int i;\n'][0]
+    index = [i for i, line in enumerate(input) if line.startswith('int i;')][0]
     beginning = input[:index+1]
     start = index+1
     
@@ -317,10 +317,10 @@ rewritten_ending = rewrite_ending(ending, rewritten_assertion)
 
 non_probabilistic_program = prefix + beginning + transformed_input + rewritten_ending
 
-output_file = 'transformed ' + filename
+output_file = filename[:-2] + '_output.c'
 with open(output_file, 'w') as o:
     o.writelines(non_probabilistic_program)
 
 f = open(output_file, "r")
 
-subprocess.run(['./vajra', output_file])
+#subprocess.run(['./vajra', output_file])
