@@ -1,5 +1,6 @@
+import os
 import sys
-import subprocess
+from subprocess import Popen, PIPE
 from collections import deque
 from math import gcd
 from math import lcm
@@ -317,10 +318,25 @@ rewritten_ending = rewrite_ending(ending, rewritten_assertion)
 
 non_probabilistic_program = prefix + beginning + transformed_input + rewritten_ending
 
-output_file = filename[:-2] + '_output.c'
+
+if not os.path.exists("converted_tests"):
+   # Create a new directory because it does not exist
+   os.makedirs("converted_tests")
+
+output_file = 'converted_tests/' + 'converted_' + filename.split("/")[1][:-2] + '.c'
 with open(output_file, 'w') as o:
     o.writelines(non_probabilistic_program)
 
-f = open(output_file, "r")
+output = ""
+with Popen(["python", "child_process.py"], stdout=PIPE) as p:
+    while p.poll() is None:
+        output += p.stdout.read1().decode("utf-8")
 
-#subprocess.run(['./vajra', output_file])
+if('SUCCESSFUL' in output):
+    print("SUCCESSFUL")
+elif('UNKNOWN' in output):
+    print("UNKNOWN")
+else:
+    print("FAILED")
+
+#(['./vajra', output_file])
