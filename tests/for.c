@@ -1,5 +1,5 @@
 int N;
-    // asdasd 
+    // less than a second
 int main()
 {
 	N = nondet_int();
@@ -7,17 +7,19 @@ int main()
     int i;
     int f[1];
     f[0] = 0;
+	int a;
     for(i=0; i<N; i++)
     {   
-	pif(1/2){
-	 pif(1/2){
-	f[0] = f[0] -1;
-	}pelse{
-	f[0] = f[0] -3;
-	}
-	}pelse{
-	 f[0] = f[0] + 7;
-	}
+		pif(1/2){
+			a = |1/2|·2 + |1/2|·4 ;
+			pif(1/2){
+				f[0] = f[0] - a/3;
+			}pelse{
+				f[0] = f[0] - a;
+			}
+		}pelse{
+			f[0] = f[0] + 7;
+		}
     } 
     assert(E(f[0]) == (5 * N)/2);
 

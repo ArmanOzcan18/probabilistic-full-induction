@@ -1,5 +1,5 @@
 int N;
-
+// 1-2 seconds
 int main()
 {
 	N = nondet_int();
